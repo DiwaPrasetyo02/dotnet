@@ -1,0 +1,33 @@
+@model WebAppMVC.Models.Attendence
+
+@{
+    ViewData["Title"] = "Hapus Absensi";
+}
+
+<h2>Hapus Absensi</h2>
+<h3>Apakah Anda yakin ingin menghapus data absensi ini?</h3>
+
+<div>
+    <h4>Absensi</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Participants Id</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Participants_Id)</dd>
+
+        <dt class="col-sm-2">Tanggal</dt>
+        <dd class="col-sm-10">@Model.Date.ToString("dd-MM-yyyy")</dd>
+
+        <dt class="col-sm-2">Status</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Status)</dd>
+
+        <dt class="col-sm-2">Catatan</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Notes)</dd>
+    </dl>
+
+    <form asp-action="Delete" asp-route-participantsId="@Model.Participants_Id" method="post">
+        <input type="hidden" asp-for="Participants_Id" />
+        <input type="submit" value="Hapus" class="btn btn-danger" /> |
+        <a asp-action="Index">Kembali ke Daftar</a>
+    </form>
+</div>
+

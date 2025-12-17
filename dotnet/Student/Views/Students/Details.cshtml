@@ -1,0 +1,32 @@
+﻿@model WebAppMVC.Models.Student
+@{
+    ViewData["Title"] = "Detail Siswa";
+}
+<h2>Detail Siswa</h2>
+<div>
+    <h4>Siswa</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Nama
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Name
+        </dd>
+        <dt class="col-sm-2">
+            Email
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Email
+        </dd>
+        <dt class="col-sm-2">
+            Usia
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Age
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Kembali ke Daftar</a>

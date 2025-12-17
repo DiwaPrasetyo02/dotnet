@@ -1,0 +1,19 @@
+@{
+    var message = TempData["Message"] as string;
+    var requestId = ViewBag.RequestId as string;
+}
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @message
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(requestId))
+{
+    <div class="text-muted small mb-3">
+        RequestId (Transient): @requestId
+    </div>
+}

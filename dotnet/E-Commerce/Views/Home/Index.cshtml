@@ -1,0 +1,52 @@
+@{
+    ViewData["Title"] = "Paradaya Store";
+}
+
+<section class="py-5">
+    <div class="row align-items-center">
+        <div class="col-md-7">
+            <h1 class="display-5 fw-bold">E-Commerce Demo tanpa Login</h1>
+            <p class="lead text-muted">
+                Contoh implementasi MVC: form handling, model binding, dependency injection (Singleton, Scoped, Transient),
+                landing page, katalog produk, dan keranjang sederhana.
+            </p>
+            <div class="d-flex gap-2 mt-3">
+                <a class="btn btn-primary btn-lg" asp-controller="Catalog" asp-action="Index">Belanja Sekarang</a>
+                <a class="btn btn-outline-secondary btn-lg" asp-controller="Products" asp-action="Index">Kelola Produk</a>
+            </div>
+        </div>
+        <div class="col-md-5 text-center">
+            <img src="https://via.placeholder.com/460x320?text=Paradaya+Store" class="img-fluid rounded shadow" alt="Hero" />
+        </div>
+    </div>
+</section>
+
+<section class="mb-5">
+    <h3 class="mb-3">Fitur</h3>
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">CRUD Produk (Admin)</h5>
+                    <p class="card-text">Form Bootstrap dengan validasi data dan model binding.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Katalog & Keranjang</h5>
+                    <p class="card-text">Customer dapat menambah, mengurangi, dan melihat ringkasan belanja.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Dependency Injection</h5>
+                    <p class="card-text">Repository (Singleton), cart service (Scoped), request id provider (Transient).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

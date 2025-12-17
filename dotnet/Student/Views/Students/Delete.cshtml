@@ -1,0 +1,35 @@
+﻿@model WebAppMVC.Models.Student
+@{
+    ViewData["Title"] = "Hapus Siswa";
+}
+<h2>Hapus Siswa</h2>
+<h3>Apakah Anda yakin ingin menghapus siswa ini?</h3>
+<div>
+    <h4>Siswa</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Nama
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Email
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            Usia
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+    </dl>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Hapus" class="btn btn-danger" /> |
+        <a asp-action="Index">Kembali ke Daftar</a>
+    </form>
+</div>

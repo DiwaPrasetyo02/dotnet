@@ -1,0 +1,48 @@
+@model WebAppMVC.Models.Attendence
+
+@{
+    ViewData["Title"] = "Edit Absensi";
+}
+
+<h2>Edit Absensi</h2>
+
+<form asp-action="Edit" asp-route-participantsId="@Model.Participants_Id" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <!-- key -->
+    <input type="hidden" asp-for="Participants_Id" />
+
+    <div class="form-group">
+        <label asp-for="Date"></label>
+        <input asp-for="Date" type="date" class="form-control" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Status"></label>
+        <select asp-for="Status" class="form-control"
+                asp-items="Html.GetEnumSelectList<WebAppMVC.Models.AttendanceStatus>()">
+            <option value="">-- Pilih Status --</option>
+        </select>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Notes"></label>
+        <textarea asp-for="Notes" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Notes" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+</form>
+
+<div>
+    <a asp-action="Index">Kembali ke Daftar</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

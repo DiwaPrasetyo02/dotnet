@@ -1,0 +1,33 @@
+# Local folders (project-specific)
+my-profile/
+belajar/
+
+# Visual Studio / Rider / VS Code
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.csproj.user
+
+# .NET build output
+**/bin/
+**/obj/
+**/artifacts/
+TestResults/
+
+# NuGet packages (older style)
+**/packages/
+*.nupkg
+*.snupkg
+
+# Local databases
+*.db
+*.db-shm
+*.db-wal
+
+# OS noise
+Thumbs.db
+Desktop.ini

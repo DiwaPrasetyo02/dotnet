@@ -1,0 +1,19 @@
+@model E_Commerce.Models.Product
+@{
+    ViewData["Title"] = "Tambah Produk";
+    Layout = "_AdminLayout";
+}
+
+<h2 class="mb-3">Tambah Produk</h2>
+
+<form asp-action="Create" method="post" class="card card-body shadow-sm">
+    <partial name="_Form" />
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Simpan</button>
+        <a class="btn btn-outline-secondary" asp-action="Index">Batal</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

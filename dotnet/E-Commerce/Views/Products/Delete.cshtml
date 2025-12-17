@@ -1,0 +1,23 @@
+@model E_Commerce.Models.Product
+@{
+    ViewData["Title"] = "Hapus Produk";
+    Layout = "_AdminLayout";
+}
+
+<h2 class="mb-3 text-danger">Hapus Produk</h2>
+<p class="text-muted">Tindakan ini tidak dapat dibatalkan.</p>
+
+<div class="card mb-3 shadow-sm">
+    <div class="card-body">
+        <h4>@Model.Name</h4>
+        <p>@Model.Description</p>
+        <p>Harga: @Model.Price.ToString("C0")</p>
+        <p>Stock: @Model.Stock</p>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post" class="d-flex gap-2">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Ya, hapus</button>
+    <a class="btn btn-secondary" asp-action="Index">Batal</a>
+</form>
