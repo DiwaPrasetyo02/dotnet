@@ -1,0 +1,39 @@
+@model WebAppMVC.Models.Course
+@{
+    ViewData["Title"] = "Edit Course";
+}
+
+<h2>Edit Course</h2>
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="MataKuliah"></label>
+        <input asp-for="MataKuliah" class="form-control" />
+        <span asp-validation-for="MataKuliah" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DosenPengampu"></label>
+        <input asp-for="DosenPengampu" class="form-control" />
+        <span asp-validation-for="DosenPengampu" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StudentId"></label>
+        <select asp-for="StudentId" class="form-control" asp-items="ViewBag.StudentId"></select>
+        <span asp-validation-for="StudentId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+    <a asp-action="Index" class="btn btn-link">Kembali</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attendance", "..\Attendace\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-Commerce", "..\E-Commerce\E-Commerce.csproj", "{4187B7EF-9080-4819-A547-F43FC4942CB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "latihan-api", "..\latihan-api\latihan-api.csproj", "{BD182651-AC75-4D6A-B269-A8C0CF3FDAF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{4187B7EF-9080-4819-A547-F43FC4942CB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4187B7EF-9080-4819-A547-F43FC4942CB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4187B7EF-9080-4819-A547-F43FC4942CB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD182651-AC75-4D6A-B269-A8C0CF3FDAF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD182651-AC75-4D6A-B269-A8C0CF3FDAF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD182651-AC75-4D6A-B269-A8C0CF3FDAF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD182651-AC75-4D6A-B269-A8C0CF3FDAF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

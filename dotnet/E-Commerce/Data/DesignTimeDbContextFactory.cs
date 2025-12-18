@@ -20,10 +20,10 @@ namespace E_Commerce.Data
 
             // Fallback default connection for design-time operations.
             var connectionString =
-                configuration.GetConnectionString("Default")
-                ?? "Host=localhost;Port=5432;Database=ecommerce_dev;Username=postgres;Password=YOUR_PASSWORD";
+                configuration.GetConnectionString("DefaultConnection")
+                ?? "Server=localhost,1433;Database=ECommerceDb_Dev;User Id=sa;Password=Str0ngP@ssw0rd!123;TrustServerCertificate=True;Encrypt=False";
 
-            optionsBuilder.UseNpgsql(connectionString);
+            optionsBuilder.UseSqlServer(connectionString);
 
             return new ECommerceDbContext(optionsBuilder.Options);
         }

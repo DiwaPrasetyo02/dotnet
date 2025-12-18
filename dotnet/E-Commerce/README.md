@@ -70,3 +70,50 @@
 - Customer melihat katalog dari repo yang sama (Singleton) → tambah ke keranjang (session) via `ICartService`.
 - Keranjang tersimpan per user session; qty bisa ditambah/dikurangi, item dihapus, atau keranjang dikosongkan.
 - Notifikasi menggunakan `TempData["Message"]`; RequestId menampilkan contoh DI Transient.
+
+## Database & Migrasi (SQL Server)
+
+### Prasyarat
+- .NET SDK terpasang
+- Docker Desktop terpasang
+- EF Tools terpasang (jika belum):
+  ```bash
+  dotnet tool install --global dotnet-ef
+  ```
+
+### Menjalankan SQL Server via Docker
+
+```bash
+cd dotnet/E-Commerce
+docker compose up -d
+```
+
+Tunggu beberapa detik sampai container SQL Server siap, lalu:
+
+```bash
+dotnet ef database update
+dotnet run
+```
+
+### Migrasi Database
+
+```bash
+# Buat migration baru (jika ada perubahan model)
+dotnet ef migrations add NamaMigrationBaru
+
+# Terapkan migration ke database
+dotnet ef database update
+```
+
+### Connection String
+
+Project menggunakan SQL Server dengan connection string:
+- **Production**: `DefaultConnection` di `appsettings.json`
+- **Development**: `DefaultConnection` di `appsettings.Development.json`
+
+Format: `Server=localhost,1433;Database=ECommerceDb;User Id=sa;Password=Str0ngP@ssw0rd!123;TrustServerCertificate=True;Encrypt=False`
+
+### Catatan
+- Database akan otomatis dibuat saat pertama kali menjalankan aplikasi (via `DbInitializer`).
+- Migration akan otomatis diterapkan saat startup (via `Program.cs`).
+- Data seed (3 produk contoh) akan otomatis ditambahkan jika tabel `Products` masih kosong.

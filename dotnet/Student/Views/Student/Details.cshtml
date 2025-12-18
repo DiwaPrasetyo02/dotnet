@@ -27,6 +27,49 @@
         </dd>
     </dl>
 </div>
+
+<hr />
+<div>
+    <h4>Kursus yang diambil</h4>
+    <p>
+        <a asp-controller="Course" asp-action="Create" asp-route-studentId="@Model.Id">Tambah Course</a>
+        |
+        <a asp-controller="Course" asp-action="Index" asp-route-studentId="@Model.Id">Lihat Semua Course Siswa Ini</a>
+    </p>
+
+    @if (Model.Courses != null && Model.Courses.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Mata Kuliah</th>
+                    <th>Dosen Pengampu</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var course in Model.Courses)
+                {
+                    <tr>
+                        <td>@course.Id</td>
+                        <td>@course.MataKuliah</td>
+                        <td>@course.DosenPengampu</td>
+                        <td>
+                            <a asp-controller="Course" asp-action="Edit" asp-route-id="@course.Id">Edit</a> |
+                            <a asp-controller="Course" asp-action="Details" asp-route-id="@course.Id">Detail</a> |
+                            <a asp-controller="Course" asp-action="Delete" asp-route-id="@course.Id">Hapus</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="text-muted">Belum ada course untuk siswa ini.</p>
+    }
+</div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Kembali ke Daftar</a>

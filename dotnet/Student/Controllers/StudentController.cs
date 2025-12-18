@@ -2,6 +2,7 @@
 using WebAppMVC.Models;
 using WebAppMVC.Data; // Tambahkan ini
 using Microsoft.EntityFrameworkCore; // Tambahkan ini
+using System.Linq;
 namespace WebAppMVC.Controllers
 {
     public class StudentController : Controller
@@ -15,7 +16,9 @@ namespace WebAppMVC.Controllers
         // GET: Student
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Students.ToListAsync());
+            return View(await _context.Students
+                .Include(s => s.Courses)
+                .ToListAsync());
         }
         // GET: Student/Details/{id}
         public async Task<IActionResult> Details(int? id)
@@ -26,8 +29,9 @@ namespace WebAppMVC.Controllers
             }
 
         
-var student = await _context.Students
-.FirstOrDefaultAsync(m => m.Id == id);
+            var student = await _context.Students
+                .Include(s => s.Courses)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (student == null)
             {
                 return NotFound();

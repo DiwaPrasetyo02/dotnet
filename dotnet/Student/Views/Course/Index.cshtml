@@ -1,0 +1,46 @@
+@model IEnumerable<WebAppMVC.Models.Course>
+@{
+    ViewData["Title"] = "Daftar Course";
+    var studentName = ViewBag.StudentName as string;
+    var studentId = ViewBag.StudentId as int?;
+}
+
+<h2>Daftar Course</h2>
+
+@if (!string.IsNullOrWhiteSpace(studentName))
+{
+    <p class="text-muted">Filter siswa: <strong>@studentName</strong></p>
+}
+
+<p>
+    <a asp-action="Create" asp-route-studentId="@studentId">Tambah Course</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Mata Kuliah</th>
+            <th>Dosen Pengampu</th>
+            <th>Siswa</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.MataKuliah</td>
+                <td>@item.DosenPengampu</td>
+                <td>@item.Student?.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detail</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Hapus</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Npgsql;
+using Microsoft.Data.SqlClient;
 using E_Commerce.Models;
 using System.Linq;
 
@@ -11,10 +11,10 @@ namespace E_Commerce.Data
     {
         public static void EnsureDatabaseAndMigrations(IServiceProvider services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("Default");
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
             if (string.IsNullOrWhiteSpace(connectionString))
             {
-                throw new InvalidOperationException("ConnectionStrings:Default belum di-set.");
+                throw new InvalidOperationException("ConnectionStrings:DefaultConnection belum di-set.");
             }
 
             EnsureDatabaseExists(connectionString);
@@ -62,36 +62,32 @@ namespace E_Commerce.Data
 
         private static void EnsureDatabaseExists(string connectionString)
         {
-            var builder = new NpgsqlConnectionStringBuilder(connectionString);
-            var targetDb = builder.Database;
+            var builder = new SqlConnectionStringBuilder(connectionString);
+            var targetDb = builder.InitialCatalog;
 
             if (string.IsNullOrWhiteSpace(targetDb))
             {
-                // If database isn't specified, assume it's fine.
                 return;
             }
 
-            // Connect to the default admin database to create target DB if missing.
-            var adminBuilder = new NpgsqlConnectionStringBuilder(connectionString)
-            {
-                Database = "postgres"
-            };
+            // Connect to master database to create target DB if missing
+            builder.InitialCatalog = "master";
+            var masterConnectionString = builder.ConnectionString;
 
-            using var conn = new NpgsqlConnection(adminBuilder.ConnectionString);
+            using var conn = new SqlConnection(masterConnectionString);
             conn.Open();
 
             using (var existsCmd = conn.CreateCommand())
             {
-                existsCmd.CommandText = "SELECT 1 FROM pg_database WHERE datname = @name;";
-                existsCmd.Parameters.AddWithValue("name", targetDb);
+                existsCmd.CommandText = "SELECT 1 FROM sys.databases WHERE name = @name;";
+                existsCmd.Parameters.AddWithValue("@name", targetDb);
                 var exists = existsCmd.ExecuteScalar() is not null;
                 if (exists) return;
             }
 
             using (var createCmd = conn.CreateCommand())
             {
-                // Quote database identifier to be safe.
-                createCmd.CommandText = $"CREATE DATABASE \"{targetDb.Replace("\"", "\"\"")}\";";
+                createCmd.CommandText = $"CREATE DATABASE [{targetDb.Replace("]", "]]")}];";
                 createCmd.ExecuteNonQuery();
             }
         }

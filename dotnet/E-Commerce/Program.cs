@@ -14,8 +14,11 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
+    throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
 builder.Services.AddDbContext<ECommerceDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+    options.UseSqlServer(connectionString));
 
 // Dependency Injection lifetimes:
 // Repository memakai EF Core (scoped)
@@ -27,7 +30,7 @@ builder.Services.AddTransient<IRequestIdProvider, GuidRequestIdProvider>();
 
 var app = builder.Build();
 
-// Ensure DB exists & apply migrations at startup (PostgreSQL needs DB created first).
+// Ensure DB exists & apply migrations at startup (SQL Server needs DB created first).
 DbInitializer.EnsureDatabaseAndMigrations(app.Services, app.Configuration);
 
 // Configure the HTTP request pipeline.
