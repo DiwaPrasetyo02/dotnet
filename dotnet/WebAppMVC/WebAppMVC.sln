@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-Commerce", "..\E-Commerce
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "latihan-api", "..\latihan-api\latihan-api.csproj", "{BD182651-AC75-4D6A-B269-A8C0CF3FDAF0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorClientApp", "..\BlazorClientApp\BlazorClientApp.csproj", "{B370470C-629C-4338-85E1-BAFF96CABF58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{BD182651-AC75-4D6A-B269-A8C0CF3FDAF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD182651-AC75-4D6A-B269-A8C0CF3FDAF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD182651-AC75-4D6A-B269-A8C0CF3FDAF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B370470C-629C-4338-85E1-BAFF96CABF58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B370470C-629C-4338-85E1-BAFF96CABF58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B370470C-629C-4338-85E1-BAFF96CABF58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B370470C-629C-4338-85E1-BAFF96CABF58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,48 @@
+@page "/students"
+@using WebAppMVC.Models
+@inject HttpClient Http
+<h1>Students List</h1>
+@if (students == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in students)
+            {
+                <tr>
+                    <td>@student.Id</td>
+                    <td>@student.Name</td>
+                    <td>@student.Email</td>
+                    <td>@student.Age</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@code {
+    private Student[]? students;
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Menggunakan API versioning v1.0
+            students = await Http.GetFromJsonAsync<Student[]>("api/v1/StudentsApi");
+        }
+        catch (HttpRequestException ex)
+        {
+            // Tangani error, misalnya jika API tidak berjalan atau ada masalah CORS
+            Console.WriteLine($"Error fetching students: {ex.Message}");
+        }
+    }
+}

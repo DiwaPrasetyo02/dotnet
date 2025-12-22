@@ -10,6 +10,29 @@ services:
       - "1433:1433"
     volumes:
       - mssqldata:/var/opt/mssql
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Str0ngP@ssw0rd!123 -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 3s
+      retries: 10
+
+  student-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: student-api
+    ports:
+      - "5229:80"
+      - "7291:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Server=mssql,1433;Database=StudentDb;User Id=sa;Password=Str0ngP@ssw0rd!123;TrustServerCertificate=True;Encrypt=False
+    depends_on:
+      mssql:
+        condition: service_healthy
+    volumes:
+      - ./appsettings.json:/app/appsettings.json:ro
 
 volumes:
   mssqldata:

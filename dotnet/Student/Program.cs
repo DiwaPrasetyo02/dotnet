@@ -7,6 +7,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using WebAppMVC.Data;
 using WebAppMVC.Services;
 
+// WebAppMVC/Program.cs
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
@@ -39,6 +40,25 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddControllersWithViews();
+
+// Tambahkan CORS Policy untuk Blazor WebAssembly Client
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins(
+            "https://localhost:7145",  // BlazorClientApp HTTPS
+            "http://localhost:5169",   // BlazorClientApp HTTP
+            "https://localhost:7094",  // Alternatif port jika digunakan
+            "http://localhost:5270",   // Alternatif port jika digunakan
+            "https://localhost:7002"   // Alternatif port jika digunakan
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials(); // Penting untuk cookies/auth jika diperlukan
+    });
+});
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -59,6 +79,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
+// Gunakan CORS middleware sebelum UseAuthorization dan MapControllers
+app.UseCors();
+
 app.UseAuthorization();
 
 // Map API controllers
